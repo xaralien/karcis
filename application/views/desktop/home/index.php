@@ -7,22 +7,31 @@
       <div class="carousel-inner">
         <?php foreach ($featured as $i => $e): ?>
         <div class="carousel-item <?= $i === 0 ? 'active' : '' ?>">
-          <img src="<?= html_escape($this->fmt->img($e->banner)) ?>" alt="">
-          <div class="hero-caption">
-            <span class="chip"><?= html_escape($e->event_type) ?></span>
-            <h2><?= html_escape($e->title) ?></h2>
-            <div class="hero-meta">
-              <span><i class="bi bi-calendar3 me-2"></i><?= $this->fmt->tgl($e->start_date, FALSE) ?><?= $e->total_days > 1 ? ' (' . (int) $e->total_days . ' hari)' : '' ?></span>
-              <span><i class="bi bi-geo-alt me-2"></i><?= html_escape($e->city) ?></span>
-            </div>
-            <a href="<?= $this->fmt->url('event/detail/' . $e->slug) ?>" class="btn btn-sun btn-lg">Beli tiket &middot; <?= $this->fmt->rupiah($e->min_price) ?></a>
-          </div>
+          <a class="hero-card" href="<?= $this->fmt->url('event/detail/' . $e->slug) ?>">
+            <span class="banner-frame"><img src="<?= html_escape($this->fmt->img($e->banner)) ?>" alt="Banner <?= html_escape($e->title) ?>"></span>
+            <span class="hero-card-bd">
+              <span class="info">
+                <span class="chip"><?= html_escape($e->event_type) ?></span>
+                <span class="t"><?= html_escape($e->title) ?></span>
+                <span class="meta">
+                  <span><i class="bi bi-calendar3 me-2"></i><?= $this->fmt->tgl($e->start_date, FALSE) ?><?= $e->total_days > 1 ? ' (' . (int) $e->total_days . ' hari)' : '' ?></span>
+                  <span><i class="bi bi-geo-alt me-2"></i><?= html_escape($e->venue) ?>, <?= html_escape($e->city) ?></span>
+                </span>
+              </span>
+              <span class="btn btn-sun btn-lg text-nowrap">Beli tiket · <?= $this->fmt->rupiah($e->min_price) ?></span>
+            </span>
+          </a>
         </div>
         <?php endforeach; ?>
       </div>
       <?php if (count($featured) > 1): ?>
-      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Sebelumnya</span></button>
-      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Berikutnya</span></button>
+      <div class="hero-nav">
+        <button class="hero-arrow" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Sebelumnya"><i class="bi bi-chevron-left"></i></button>
+        <div class="carousel-indicators position-static m-0">
+          <?php foreach ($featured as $i => $e): ?><button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?= $i ?>" class="<?= $i === 0 ? 'active' : '' ?>" aria-label="Slide <?= $i + 1 ?>"></button><?php endforeach; ?>
+        </div>
+        <button class="hero-arrow" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Berikutnya"><i class="bi bi-chevron-right"></i></button>
+      </div>
       <?php endif; ?>
     </div>
     <?php endif; ?>

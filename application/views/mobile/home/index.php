@@ -2,22 +2,26 @@
 <?php if ($featured): ?>
 <section class="m-hero">
   <div id="mHero" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-touch="true">
-    <div class="carousel-indicators">
-      <?php foreach ($featured as $i => $e): ?><button type="button" data-bs-target="#mHero" data-bs-slide-to="<?= $i ?>" class="<?= $i === 0 ? 'active' : '' ?>" aria-label="Slide <?= $i + 1 ?>"></button><?php endforeach; ?>
-    </div>
     <div class="carousel-inner">
       <?php foreach ($featured as $i => $e): ?>
       <div class="carousel-item <?= $i === 0 ? 'active' : '' ?>">
-        <img src="<?= html_escape($this->fmt->img($e->banner)) ?>" alt="">
-        <div class="m-hero-cap">
-          <span class="chip"><?= html_escape($e->event_type) ?></span>
-          <h2><?= html_escape($e->title) ?></h2>
-          <div class="meta"><i class="bi bi-calendar3 me-1"></i><?= $this->fmt->tgl($e->start_date, FALSE) ?> · <?= html_escape($e->city) ?></div>
-          <a href="<?= $this->fmt->url('event/detail/' . $e->slug) ?>" class="btn btn-sun w-100">Beli tiket · <?= $this->fmt->rupiah($e->min_price) ?></a>
-        </div>
+        <a class="hero-card" href="<?= $this->fmt->url('event/detail/' . $e->slug) ?>">
+          <span class="banner-frame"><img src="<?= html_escape($this->fmt->img($e->banner)) ?>" alt="Banner <?= html_escape($e->title) ?>"></span>
+          <span class="hero-card-bd">
+            <span class="chip"><?= html_escape($e->event_type) ?></span>
+            <span class="t"><?= html_escape($e->title) ?></span>
+            <span class="meta"><i class="bi bi-calendar3 me-1"></i><?= $this->fmt->tgl($e->start_date, FALSE) ?> · <?= html_escape($e->city) ?></span>
+            <span class="btn btn-sun w-100 mt-2">Beli tiket · <?= $this->fmt->rupiah($e->min_price) ?></span>
+          </span>
+        </a>
       </div>
       <?php endforeach; ?>
     </div>
+    <?php if (count($featured) > 1): ?>
+    <div class="carousel-indicators">
+      <?php foreach ($featured as $i => $e): ?><button type="button" data-bs-target="#mHero" data-bs-slide-to="<?= $i ?>" class="<?= $i === 0 ? 'active' : '' ?>" aria-label="Slide <?= $i + 1 ?>"></button><?php endforeach; ?>
+    </div>
+    <?php endif; ?>
   </div>
 </section>
 <?php endif; ?>

@@ -24,7 +24,6 @@ body.has-buybar { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
 /* Carousel mobile */
 .m-hero { background: var(--ink); padding: 4px 16px 22px; }
 .m-hero .carousel-item { border-radius: var(--r-md); overflow: hidden; aspect-ratio: 4 / 5; }
-.m-hero .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
 .m-hero .carousel-item::after { content:""; position:absolute; inset:0; background: linear-gradient(0deg, rgba(30,21,64,.95) 0%, rgba(30,21,64,.35) 55%, rgba(30,21,64,0) 80%); }
 .m-hero-cap { position: absolute; z-index: 2; left: 18px; right: 18px; bottom: 36px; color: #fff; }
 .m-hero-cap h2 { font-size: 2rem; line-height: 1; margin: 10px 0 8px; }
@@ -73,7 +72,6 @@ body.has-buybar { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
 
 /* Detail */
 .m-ev-banner { aspect-ratio: 16 / 10; background: var(--ink); }
-.m-ev-banner img { width: 100%; height: 100%; object-fit: cover; }
 .m-ev-head { background: #fff; padding: 18px 16px; border-radius: var(--r-lg) var(--r-lg) 0 0; margin-top: -22px; position: relative; }
 .m-ev-head h1 { font-size: 1.75rem; line-height: 1.05; margin: 8px 0 12px; }
 .m-ev-head .ln { display: flex; gap: 10px; font-size: .88rem; margin-top: 6px; }
@@ -106,3 +104,17 @@ body.has-buybar { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
 .steps li:not(:last-child)::after { min-width: 8px; }
 .m-tabbar a { font-size: .66rem; }
 .m-tabbar a i { font-size: 1.2rem; }
+
+/* Carousel beranda: banner utuh, keterangan di bawah */
+.m-hero { padding: 6px 16px 18px; }
+.m-hero .carousel-item { aspect-ratio: auto; border-radius: 0; overflow: visible; }
+.m-hero .carousel-item::after { display: none; }
+.m-hero .hero-card { border-radius: var(--r-md); }
+.m-hero .hero-card-bd { display: block; padding: 14px 16px 16px; }
+.m-hero .hero-card-bd .t { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1.1; margin: 8px 0 4px; letter-spacing: -0.02em; }
+.m-hero .hero-card-bd .meta { display: block; font-size: .85rem; color: rgba(255,255,255,.78); }
+.m-hero .carousel-indicators { position: static; margin: 12px 0 0; }
+
+/* Detail event: banner utuh, kepala tidak menumpuk gambar */
+.m-ev-banner { aspect-ratio: auto; background: #120C29; }
+.m-ev-head { margin-top: 0; border-radius: 0; }

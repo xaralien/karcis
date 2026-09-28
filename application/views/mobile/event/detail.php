@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->vars(array('back_url' => $this->fmt->url('explore'), 'top_title' => $event->title, 'body_class' => 'has-buybar'));
 ?>
-<div class="m-ev-banner"><img src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt=""></div>
+<div class="m-ev-banner"><span class="banner-frame"><img src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt="Banner <?= html_escape($event->title) ?>"></span></div>
 <section class="m-ev-head">
   <span class="chip" style="background:var(--plum-tint)"><?= html_escape($event->category_name) ?></span>
   <h1><?= html_escape($event->title) ?></h1>

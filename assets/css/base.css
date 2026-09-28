@@ -187,3 +187,20 @@ input.uppercase:not(:placeholder-shown) { text-transform: uppercase; }
 .user-chip { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; }
 .user-chip .av { width: 30px; height: 30px; border-radius: 50%; background: var(--sun); color: var(--ink); display: grid; place-items: center; font-size: .85rem; font-weight: 800; }
 @media (max-width: 575.98px) { .hist > img { width: 68px; height: 68px; flex-basis: 68px; } }
+
+/* ==========================================================
+   Bingkai banner: rasio 16:7 (sama dengan ukuran 1600×700
+   yang disarankan di admin). object-fit: contain supaya
+   poster bertulisan TIDAK PERNAH terpotong; bila rasio
+   gambar berbeda, sisa ruang terisi warna gelap.
+   ========================================================== */
+.banner-frame { display: block; position: relative; aspect-ratio: 16 / 7; background: #120C29; overflow: hidden; }
+.banner-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.hero-card { display: block; color: #fff; border-radius: var(--r-lg); overflow: hidden; background: #2A1F55; }
+.hero-card:hover { color: #fff; }
+.hero-card .chip { position: static; }
+/* aturan lama carousel & detail memakai cover; bingkai banner selalu contain */
+.hero .banner-frame img,
+.m-hero .banner-frame img,
+.ev-hero .banner-frame img,
+.m-ev-banner .banner-frame img { object-fit: contain; width: 100%; height: 100%; opacity: 1; transform: none; }

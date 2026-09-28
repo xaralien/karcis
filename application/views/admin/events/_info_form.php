@@ -96,8 +96,9 @@ $action = $event->id ? 'admin/events/edit/' . $event->id : 'admin/events/create'
     <div class="card-k mt-3">
       <div class="hd"><h5>Gambar</h5></div>
       <div class="bd">
-        <label class="form-label" for="banner">Banner <span class="hint">(1600×700, maks 3MB)</span></label>
-        <img id="pvBanner" class="img-preview mb-2" src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt="">
+        <label class="form-label" for="banner">Banner <span class="hint">(1600×700 px, maks 3MB)</span></label>
+        <div class="hint mb-2">Selalu tampil utuh tanpa dipotong di carousel dan halaman detail. Gambar dengan rasio lain tetap utuh, hanya diberi latar gelap di sisinya.</div>
+        <img id="pvBanner" class="img-preview mb-2" style="aspect-ratio:16/7;object-fit:contain;background:#120C29" src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt="">
         <input class="form-control form-control-sm" type="file" id="banner" name="banner" accept="image/jpeg,image/png,image/webp" data-preview="#pvBanner" <?= $event->id ? '' : 'required' ?>>
         <?= $err('banner') ?>
         <label class="form-label mt-3" for="thumbnail">Thumbnail <span class="hint">(800×600)</span></label>

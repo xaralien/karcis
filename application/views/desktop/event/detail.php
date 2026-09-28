@@ -1,15 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <section class="ev-hero">
-  <img src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt="">
-  <div class="ev-hero-inner">
-    <div class="container">
-      <div class="breadcrumb-k"><a href="<?= $this->fmt->base() ?>">Beranda</a> / <a href="<?= $this->fmt->url('explore?kategori=' . $event->category_slug) ?>"><?= html_escape($event->category_name) ?></a></div>
-      <h1><?= html_escape($event->title) ?></h1>
-      <div class="hero-meta d-flex gap-4 fw-semibold">
-        <span><i class="bi bi-calendar3 me-2"></i><?= $this->fmt->tgl($event->start_date, FALSE) ?><?= $event->end_date !== $event->start_date ? ' – ' . $this->fmt->tgl($event->end_date, FALSE) : '' ?></span>
-        <span><i class="bi bi-geo-alt me-2"></i><?= html_escape($event->venue) ?>, <?= html_escape($event->city) ?></span>
-        <span><i class="bi bi-person-badge me-2"></i><?= html_escape($event->organizer) ?></span>
-      </div>
+  <div class="container">
+    <div class="breadcrumb-k mb-3"><a href="<?= $this->fmt->url('') ?>">Beranda</a> / <a href="<?= $this->fmt->url('explore?kategori=' . $event->category_slug) ?>"><?= html_escape($event->category_name) ?></a></div>
+    <span class="banner-frame ev-banner"><img src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt="Banner <?= html_escape($event->title) ?>"></span>
+    <h1><?= html_escape($event->title) ?></h1>
+    <div class="hero-meta d-flex flex-wrap gap-4 fw-semibold">
+      <span><i class="bi bi-calendar3 me-2"></i><?= $this->fmt->tgl($event->start_date, FALSE) ?><?= $event->end_date !== $event->start_date ? ' – ' . $this->fmt->tgl($event->end_date, FALSE) : '' ?></span>
+      <span><i class="bi bi-geo-alt me-2"></i><?= html_escape($event->venue) ?>, <?= html_escape($event->city) ?></span>
+      <span><i class="bi bi-person-badge me-2"></i><?= html_escape($event->organizer) ?></span>
     </div>
   </div>
 </section>
