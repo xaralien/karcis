@@ -94,7 +94,7 @@ if ( ! $ticket_types) $warn[] = 'kategori tiket';
             <tr>
               <td><input form="<?= $fid ?>" class="form-control form-control-sm" name="name" value="<?= html_escape($t->name) ?>" required style="min-width:140px"></td>
               <td><input form="<?= $fid ?>" class="form-control form-control-sm" name="description" value="<?= html_escape($t->description) ?>" style="min-width:180px"></td>
-              <td><input form="<?= $fid ?>" class="form-control form-control-sm" type="number" name="price" value="<?= (int) $t->price ?>" min="1" step="1000" required style="width:120px"></td>
+              <td><input form="<?= $fid ?>" class="form-control form-control-sm" type="number" name="price" value="<?= (int) $t->price ?>" min="0" step="500" inputmode="numeric" required style="width:120px"></td>
               <td><input form="<?= $fid ?>" class="form-control form-control-sm" type="number" name="quota" value="<?= (int) $t->quota ?>" min="<?= max(1, (int) $t->sold) ?>" required style="width:90px"></td>
               <td class="text-nowrap"><strong><?= (int) $t->sold ?></strong><?= $t->sold >= $t->quota ? ' <span class="badge-st failed">Habis</span>' : '' ?></td>
               <td><input form="<?= $fid ?>" class="form-control form-control-sm" type="number" name="sort_order" value="<?= (int) $t->sort_order ?>" style="width:70px"></td>
@@ -107,7 +107,7 @@ if ( ! $ticket_types) $warn[] = 'kategori tiket';
             <tr style="background:#FBFAFE">
               <td><input form="ftNew" class="form-control form-control-sm" name="name" placeholder="Reguler, VIP…" required></td>
               <td><input form="ftNew" class="form-control form-control-sm" name="description" placeholder="Area berdiri"></td>
-              <td><input form="ftNew" class="form-control form-control-sm" type="number" name="price" value="100000" min="1" step="1000" required style="width:120px"></td>
+              <td><input form="ftNew" class="form-control form-control-sm" type="number" name="price" value="100000" min="0" step="500" inputmode="numeric" required style="width:120px"></td>
               <td><input form="ftNew" class="form-control form-control-sm" type="number" name="quota" placeholder="100" min="1" required style="width:90px"></td>
               <td class="text-muted-k">0</td>
               <td><input form="ftNew" class="form-control form-control-sm" type="number" name="sort_order" value="<?= count($ticket_types) + 1 ?>" style="width:70px"></td>

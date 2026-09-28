@@ -1,6 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /** Ganti password — bisa diakses admin & staff */
 class Account extends Admin_Controller
@@ -16,7 +15,7 @@ class Account extends Admin_Controller
             $this->form_validation->set_rules('password_confirm', 'Konfirmasi password', 'required|matches[password]');
 
             if ($this->form_validation->run()) {
-                if (! password_verify($this->input->post('current'), $this->admin->password)) {
+                if ( ! password_verify($this->input->post('current'), $this->admin->password)) {
                     $this->session->set_flashdata('error', 'Password lama salah.');
                 } else {
                     $this->db->where('id', $this->admin->id)->update('admins', array('password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)));

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends Base_Controller
 {
@@ -18,9 +18,7 @@ class Auth extends Base_Controller
 
         if ($this->input->method() === 'post') {
             $attempts = (array) $this->session->userdata('login_attempts');
-            $attempts = array_filter($attempts, function ($t) {
-                return $t > time() - 600;
-            });
+            $attempts = array_filter($attempts, function ($t) { return $t > time() - 600; });
 
             if (count($attempts) >= 5) {
                 $data['error'] = 'Terlalu banyak percobaan gagal. Coba lagi dalam 10 menit.';
