@@ -1,0 +1,189 @@
+/* ==========================================================
+   Karcis — token & komponen bersama (desktop + mobile)
+   ========================================================== */
+:root {
+  --ink: #1E1540;
+  --ink-soft: #4A4368;
+  --muted: #7A7394;
+  --paper: #F7F5FC;
+  --card: #FFFFFF;
+  --line: #E4DFF2;
+  --plum: #5B3FD9;
+  --plum-deep: #4329B8;
+  --plum-tint: #EEE9FF;
+  --sun: #FFB800;
+  --sun-deep: #E5A200;
+  --mint: #12966F;
+  --mint-tint: #E3F6EF;
+  --danger: #C8323B;
+  --r-lg: 20px;
+  --r-md: 14px;
+  --r-sm: 10px;
+  --font-display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --bs-body-font-family: var(--font-body);
+  --bs-body-color: var(--ink);
+  --bs-body-bg: var(--paper);
+  --bs-primary: var(--plum);
+  --bs-primary-rgb: 91, 63, 217;
+  --bs-link-color: var(--plum);
+  --bs-link-hover-color: var(--plum-deep);
+  --bs-border-color: var(--line);
+}
+
+body { font-family: var(--font-body); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .display-type { font-family: var(--font-display); letter-spacing: -0.02em; font-weight: 700; }
+h4, h5, h6 { font-weight: 700; letter-spacing: -0.01em; }
+a { color: var(--plum); text-decoration: none; }
+a:hover { color: var(--plum-deep); }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; border-radius: 6px; }
+.text-muted-k { color: var(--muted) !important; }
+
+/* Tombol */
+.btn { font-weight: 600; border-radius: 999px; padding: .6rem 1.25rem; }
+.btn-primary { --bs-btn-bg: var(--plum); --bs-btn-border-color: var(--plum); --bs-btn-hover-bg: var(--plum-deep); --bs-btn-hover-border-color: var(--plum-deep); --bs-btn-active-bg: var(--plum-deep); --bs-btn-disabled-bg: #B9AEEA; --bs-btn-disabled-border-color: #B9AEEA; }
+.btn-sun { background: var(--sun); color: var(--ink); border: 0; }
+.btn-sun:hover, .btn-sun:focus { background: var(--sun-deep); color: var(--ink); }
+.btn-sun:disabled { background: #F2E2B3; color: var(--muted); }
+.btn-outline-ink { border: 1.5px solid var(--ink); color: var(--ink); }
+.btn-outline-ink:hover { background: var(--ink); color: #fff; }
+
+.form-control, .form-select { border-radius: var(--r-sm); border-color: var(--line); padding: .7rem .9rem; }
+.form-control:focus, .form-select:focus { border-color: var(--plum); box-shadow: 0 0 0 .2rem rgba(91,63,217,.15); }
+.form-label { font-weight: 600; font-size: .92rem; }
+
+/* ----------------------------------------------------------
+   Kartu tiket bersobek — elemen khas Karcis
+   ---------------------------------------------------------- */
+.stub {
+  --notch: 11px;
+  --notch-bg: var(--paper);
+  position: relative;
+  display: flex; flex-direction: column;
+  background: var(--card);
+  border-radius: var(--r-md);
+  color: var(--ink);
+  height: 100%;
+  isolation: isolate;
+}
+.stub:hover { color: var(--ink); }
+.stub-media { position: relative; aspect-ratio: 4 / 3; border-radius: var(--r-md) var(--r-md) 0 0; overflow: hidden; background: var(--plum-tint); }
+.stub-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.stub:hover .stub-media img { transform: scale(1.04); }
+.stub-tear { position: relative; height: 0; border-top: 2px dashed var(--line); margin: 0 calc(var(--notch) + 4px); }
+.stub-tear::before, .stub-tear::after {
+  content: ""; position: absolute; top: calc(-1 * var(--notch) - 1px);
+  width: calc(var(--notch) * 2); height: calc(var(--notch) * 2); border-radius: 50%; background: var(--notch-bg);
+}
+.stub-tear::before { left: calc(-1 * (var(--notch) * 2 + 4px)); }
+.stub-tear::after  { right: calc(-1 * (var(--notch) * 2 + 4px)); }
+.stub-body { padding: 14px 16px 16px; display: flex; gap: 14px; flex: 1; }
+.stub-date { flex: 0 0 auto; text-align: center; min-width: 46px; padding-right: 12px; border-right: 1px solid var(--line); }
+.stub-date .d { font-family: var(--font-display); font-size: 1.6rem; line-height: 1; font-weight: 700; }
+.stub-date .m { font-size: .78rem; color: var(--muted); font-weight: 600; }
+.stub-info { min-width: 0; display: flex; flex-direction: column; }
+.stub-title { font-weight: 700; font-size: 1rem; line-height: 1.3; margin: 0 0 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.stub-meta { font-size: .82rem; color: var(--muted); }
+.stub-price { margin-top: auto; padding-top: 8px; font-weight: 700; color: var(--plum); font-size: .95rem; }
+.stub-price small { color: var(--muted); font-weight: 500; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: .75rem; font-weight: 600; border-radius: 999px; background: rgba(255,255,255,.92); color: var(--ink); }
+.stub-media .chip { position: absolute; left: 10px; top: 10px; }
+
+/* Pemilih jumlah tiket */
+.tt-row { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.tt-row:last-child { border-bottom: 0; }
+.tt-row.is-soldout { opacity: .55; }
+.tt-name { font-weight: 700; }
+.tt-desc { font-size: .82rem; color: var(--muted); }
+.tt-price { font-weight: 700; color: var(--plum); }
+.stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; background: #fff; }
+.stepper button { width: 36px; height: 36px; border: 0; background: transparent; font-size: 1.1rem; color: var(--ink); }
+.stepper button:disabled { color: #CFC9E0; }
+.stepper button:not(:disabled):hover { background: var(--plum-tint); }
+.stepper input { width: 34px; border: 0; text-align: center; font-weight: 700; background: transparent; -moz-appearance: textfield; }
+.stepper input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.soldout-badge { font-size: .75rem; font-weight: 700; color: var(--danger); background: #FCE8E9; padding: 4px 10px; border-radius: 999px; }
+
+.fee-table { width: 100%; font-size: .9rem; }
+.fee-table td { padding: 4px 0; }
+.fee-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.fee-table .total td { font-weight: 800; font-size: 1.05rem; padding-top: 10px; border-top: 2px dashed var(--line); }
+.fee-note { font-size: .78rem; color: var(--muted); }
+
+/* Jadwal */
+.sched { display: flex; gap: 14px; padding: 12px 0; }
+.sched + .sched { border-top: 1px solid var(--line); }
+.sched-day { flex: 0 0 56px; text-align: center; background: var(--plum-tint); border-radius: var(--r-sm); padding: 8px 4px; color: var(--plum-deep); }
+.sched-day .d { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; line-height: 1; }
+.sched-day .m { font-size: .72rem; font-weight: 700; }
+
+/* Galeri */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+.gallery-grid a { display: block; aspect-ratio: 3/2; border-radius: var(--r-sm); overflow: hidden; }
+.gallery-grid img { width: 100%; height: 100%; object-fit: cover; }
+
+.facility { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-sm); font-weight: 600; font-size: .92rem; }
+.facility i { font-size: 1.25rem; color: var(--plum); }
+
+.guest img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 0 1.5px var(--line); }
+.guest-name { font-weight: 700; margin-top: 10px; line-height: 1.25; }
+.guest-role { font-size: .82rem; color: var(--muted); }
+
+/* Tiket QR */
+.eticket { background: #fff; border-radius: var(--r-lg); overflow: hidden; --notch-bg: var(--paper); position: relative; }
+.eticket-head { background: var(--ink); color: #fff; padding: 20px 22px; }
+.eticket-head .type { color: var(--sun); font-weight: 700; font-size: .85rem; }
+.eticket-qr { padding: 22px; text-align: center; }
+.eticket-qr img { width: 220px; max-width: 100%; image-rendering: pixelated; }
+.eticket-code { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: .04em; }
+
+.status-pill { display: inline-flex; gap: 6px; align-items: center; padding: 5px 12px; border-radius: 999px; font-weight: 700; font-size: .8rem; }
+.status-paid { background: var(--mint-tint); color: var(--mint); }
+.status-pending { background: #FFF4D6; color: #8A6300; }
+.status-failed, .status-expired { background: #FCE8E9; color: var(--danger); }
+
+.email-check { background: var(--plum-tint); border-radius: var(--r-sm); padding: 14px; font-size: .88rem; }
+.email-big { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; word-break: break-all; }
+.invalid-feedback.d-block { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* Langkah pembelian */
+.steps { display: flex; gap: 8px; list-style: none; padding: 0; margin: 0; counter-reset: step; }
+.steps li { flex: 1; display: flex; align-items: center; gap: 10px; font-size: .88rem; font-weight: 600; color: var(--muted); min-width: 0; }
+.steps li::before { counter-increment: step; content: counter(step); flex: 0 0 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; background: #fff; border: 2px solid var(--line); color: var(--muted); }
+.steps li:not(:last-child)::after { content: ""; flex: 1; height: 2px; background: var(--line); min-width: 12px; }
+.steps li.done { color: var(--ink); }
+.steps li.done::before { content: "\2713"; background: var(--mint); border-color: var(--mint); color: #fff; }
+.steps li.done:not(:last-child)::after { background: var(--mint); }
+.steps li.current { color: var(--ink); }
+.steps li.current::before { background: var(--plum); border-color: var(--plum); color: #fff; }
+.steps li span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Ringkasan jenis tiket di halaman detail (tanpa pemilih) */
+.tt-preview { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: .92rem; }
+.tt-preview:last-of-type { border-bottom: 0; }
+.avail-badge { font-size: .72rem; font-weight: 700; color: var(--mint); background: var(--mint-tint); padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+
+/* Rincian tiket */
+.detail-table { width: 100%; font-size: .92rem; }
+.detail-table th { font-size: .78rem; color: var(--muted); font-weight: 600; padding: 0 0 8px; border-bottom: 1px solid var(--line); }
+.detail-table td { padding: 12px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
+.detail-table th + th, .detail-table td + td { padding-left: 14px; }
+.detail-table .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+input.uppercase:not(:placeholder-shown) { text-transform: uppercase; }
+
+/* Riwayat pesanan pembeli */
+.hist { display: flex; gap: 14px; background: #fff; border-radius: var(--r-md); padding: 14px; }
+.hist + .hist { margin-top: 12px; }
+.hist > img { width: 92px; height: 92px; flex: 0 0 92px; object-fit: cover; border-radius: 10px; background: var(--plum-tint); }
+.hist-bd { min-width: 0; flex: 1; }
+.hist-bd a.fw-bold { color: var(--ink); }
+.auth-card { background: #fff; border-radius: var(--r-lg); padding: 28px; }
+.user-chip { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; }
+.user-chip .av { width: 30px; height: 30px; border-radius: 50%; background: var(--sun); color: var(--ink); display: grid; place-items: center; font-size: .85rem; font-weight: 800; }
+@media (max-width: 575.98px) { .hist > img { width: 68px; height: 68px; flex-basis: 68px; } }
