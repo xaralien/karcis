@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Event_model extends CI_Model
 {
-    protected function base()
+    protected function base($any_status = FALSE)
     {
         return $this->db->select('e.*, c.name AS category_name, c.slug AS category_slug,
                 (SELECT MIN(price) FROM ticket_types tt WHERE tt.event_id = e.id) AS min_price,
@@ -11,7 +11,7 @@ class Event_model extends CI_Model
                 (SELECT COUNT(*) FROM event_schedules s2 WHERE s2.event_id = e.id) AS total_days', FALSE)
             ->from('events e')
             ->join('categories c', 'c.id = e.category_id')
-            ->where('e.status', 'published');
+            ->where($any_status ? '1 = 1' : "e.status = 'published'", NULL, FALSE);
     }
 
     public function featured($limit = 5)
@@ -54,9 +54,10 @@ class Event_model extends CI_Model
         if ( ! empty($f['kota']))     $this->db->where('e.city', $f['kota']);
     }
 
-    public function get_by_slug($slug)
+    /** $any_status TRUE dipakai untuk pratinjau admin (draft & selesai ikut terlihat) */
+    public function get_by_slug($slug, $any_status = FALSE)
     {
-        return $this->base()->where('e.slug', $slug)->get()->row();
+        return $this->base($any_status)->where('e.slug', $slug)->get()->row();
     }
 
     /** Tanpa filter status: untuk tiket, email, dan cetak */

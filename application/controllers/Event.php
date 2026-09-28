@@ -9,10 +9,16 @@ class Event extends MY_Controller
         $this->load->model('Event_model');
     }
 
+    /** Admin yang sedang login boleh melihat event draft/selesai sebagai pratinjau */
+    protected function is_admin()
+    {
+        return (bool) $this->session->userdata('admin_id');
+    }
+
     /** /event/detail/{slug} */
     public function detail($slug = '')
     {
-        $event = $this->Event_model->get_by_slug($slug);
+        $event = $this->Event_model->get_by_slug($slug, $this->is_admin());
         if ( ! $event) show_404();
 
         $this->render('event/detail', array(
@@ -23,6 +29,7 @@ class Event extends MY_Controller
             'facilities'   => $this->Event_model->facilities($event->id),
             'guests'       => $this->Event_model->guests($event->id),
             'gallery'      => $this->Event_model->gallery($event->id),
+            'preview'      => $event->status !== 'published',
             'active_nav'   => 'explore',
         ));
     }
@@ -30,8 +37,12 @@ class Event extends MY_Controller
     /** Langkah 1 pembelian: /event/tickets/{slug} */
     public function tickets($slug = '')
     {
-        $event = $this->Event_model->get_by_slug($slug);
+        $event = $this->Event_model->get_by_slug($slug, $this->is_admin());
         if ( ! $event) show_404();
+        if ($event->status !== 'published') {
+            $this->session->set_flashdata('error', 'Event ini belum tayang, jadi tiketnya belum bisa dibeli. Ubah status menjadi Tayang di admin.');
+            $this->go('event/detail/' . $event->slug);
+        }
 
         // Pertahankan pilihan sebelumnya bila pembeli kembali dari halaman rincian
         $cart = $this->session->userdata('cart');

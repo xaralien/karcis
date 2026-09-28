@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->vars(array('back_url' => $this->fmt->url('explore'), 'top_title' => $event->title, 'body_class' => 'has-buybar'));
 ?>
+<?php $this->load->view('shared/preview_notice'); ?>
 <div class="m-ev-banner"><span class="banner-frame"><img src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt="Banner <?= html_escape($event->title) ?>"></span></div>
 <section class="m-ev-head">
   <span class="chip" style="background:var(--plum-tint)"><?= html_escape($event->category_name) ?></span>
@@ -85,7 +86,9 @@ $this->load->vars(array('back_url' => $this->fmt->url('explore'), 'top_title' =>
     <div class="lbl">Harga mulai</div>
     <div class="amt"><?= $this->fmt->rupiah($event->min_price) ?></div>
   </div>
-  <?php if ($any): ?>
+  <?php if ( ! empty($preview)): ?>
+    <button class="btn btn-sun" disabled>Belum dijual</button>
+  <?php elseif ($any): ?>
     <a href="<?= $this->fmt->url('event/tickets/' . $event->slug) ?>" class="btn btn-sun">Pesan tiket</a>
   <?php else: ?>
     <button class="btn btn-sun" disabled>Tiket habis</button>

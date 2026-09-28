@@ -73,6 +73,10 @@ Buka **`/admin`** — login awal: `admin@karcis.id` / `admin123` (**segera ganti
 Langkah membuat event baru: **Event → Tambah event** (isi info + banner/thumbnail) → tab **Jadwal** → tab **Kategori tiket** → ubah status menjadi **Tayang**.
 Event tanpa kategori tiket otomatis tetap Draft.
 
+**Pratinjau draft:** selama kamu login sebagai admin, halaman event berstatus Draft atau Selesai tetap bisa dibuka
+(misalnya lewat tombol "Lihat halaman" di admin), lengkap dengan pita kuning "Pratinjau admin" dan tombol beli yang dinonaktifkan.
+Pengunjung biasa tetap mendapat 404 sampai statusnya diubah menjadi Tayang.
+
 Aturan pengaman:
 - Event yang sudah punya pesanan tidak bisa dihapus (ubah status ke Draft/Selesai).
 - Kategori tiket yang pernah dipesan tidak bisa dihapus; kuota tidak boleh di bawah jumlah terjual.
@@ -157,6 +161,10 @@ Pembeli punya tiga jalan tanpa perlu menghubungi admin:
 
 Batas kirim ulang 1 kali per 3 menit dari halaman status, dan 1 kali per 5 menit dari cek pesanan.
 Admin juga bisa mengirim ulang sekaligus membetulkan alamat email dari **Pesanan → detail**; perubahan email dicatat di `application/logs/`.
+
+## Pembaruan tampilan & cache
+Setiap file CSS/JS dimuat dengan penanda versi otomatis (`base.css?v=...`) yang berubah setiap kali filenya diganti.
+Jadi setelah mengunggah folder `assets` baru, browser pengunjung langsung memakai versi terbaru tanpa perlu hapus cache.
 
 ## Aset tanpa internet
 Bootstrap, Bootstrap Icons, Chart.js, dan pemindai QR disimpan lokal di `assets/vendor/`,

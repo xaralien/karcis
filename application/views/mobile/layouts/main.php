@@ -12,10 +12,10 @@ $back = isset($back_url) ? $back_url : NULL;
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/vendor/bootstrap/bootstrap.min.css') ?>" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/vendor/bootstrap-icons/bootstrap-icons.min.css') ?>" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/css/base.css') ?>" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/css/mobile.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/vendor/bootstrap/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/vendor/bootstrap-icons/bootstrap-icons.min.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/css/base.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/css/mobile.css') ?>" rel="stylesheet">
 </head>
 <body class="<?= ! empty($body_class) ? html_escape($body_class) : '' ?>">
 <header class="m-top">
@@ -44,7 +44,7 @@ $back = isset($back_url) ? $back_url : NULL;
   <a class="<?= $nav === 'account' ? 'active' : '' ?>" href="<?= $this->fmt->url($user ? 'account' : 'account/login') ?>"><i class="bi bi-person<?= $nav === 'account' ? '-fill' : '' ?>"></i><?= $user ? 'Akun' : 'Masuk' ?></a>
 </nav>
 
-<script src="<?= $this->fmt->base('assets/vendor/bootstrap/bootstrap.bundle.min.js') ?>"></script>
-<script src="<?= $this->fmt->base('assets/js/app.js') ?>"></script>
+<script src="<?= $this->fmt->asset('assets/vendor/bootstrap/bootstrap.bundle.min.js') ?>"></script>
+<script src="<?= $this->fmt->asset('assets/js/app.js') ?>"></script>
 </body>
 </html>

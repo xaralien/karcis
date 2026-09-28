@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php $this->load->view('shared/preview_notice'); ?>
 <section class="ev-hero">
   <div class="container">
     <div class="breadcrumb-k mb-3"><a href="<?= $this->fmt->url('') ?>">Beranda</a> / <a href="<?= $this->fmt->url('explore?kategori=' . $event->category_slug) ?>"><?= html_escape($event->category_name) ?></a></div>
@@ -102,7 +103,9 @@
           <div class="small text-muted-k">Harga mulai</div>
           <div class="display-type" style="font-size:2rem;line-height:1.1"><?= $this->fmt->rupiah($event->min_price) ?></div>
           <div class="mt-3"><?php $this->load->view('shared/ticket_preview'); ?></div>
-          <?php if ($any): ?>
+          <?php if ( ! empty($preview)): ?>
+            <button class="btn btn-sun btn-lg w-100 mt-3" disabled>Belum dijual (<?= $event->status === 'draft' ? 'draft' : 'selesai' ?>)</button>
+          <?php elseif ($any): ?>
             <a href="<?= $this->fmt->url('event/tickets/' . $event->slug) ?>" class="btn btn-sun btn-lg w-100 mt-3">Pesan tiket</a>
             <p class="fee-note text-center mt-2 mb-0">Maksimal <?= $this->fmt->max_tickets() ?> tiket per transaksi, tanpa login.</p>
           <?php else: ?>

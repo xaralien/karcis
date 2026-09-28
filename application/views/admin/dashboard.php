@@ -68,7 +68,7 @@ foreach ($daily as $d) { $labels[] = date('d/m', strtotime($d['date'])); $rev[] 
   </div>
 </div>
 <?php ob_start(); ?>
-<script src="<?= $this->fmt->base('assets/vendor/js/chart.umd.min.js') ?>"></script>
+<script src="<?= $this->fmt->asset('assets/vendor/js/chart.umd.min.js') ?>"></script>
 <script>
 (function () {
   if (!window.Chart) return;

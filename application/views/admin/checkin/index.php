@@ -55,7 +55,7 @@
   </div>
 </div>
 <?php ob_start(); ?>
-<script src="<?= $this->fmt->base('assets/vendor/js/html5-qrcode.min.js') ?>"></script>
+<script src="<?= $this->fmt->asset('assets/vendor/js/html5-qrcode.min.js') ?>"></script>
 <script>
 (function () {
   var url = <?= json_encode($this->fmt->url('admin/checkin/verify')) ?>;

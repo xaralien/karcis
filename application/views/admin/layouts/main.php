@@ -9,10 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/vendor/bootstrap/bootstrap.min.css') ?>" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/vendor/bootstrap-icons/bootstrap-icons.min.css') ?>" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/css/base.css') ?>" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/css/admin.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/vendor/bootstrap/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/vendor/bootstrap-icons/bootstrap-icons.min.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/css/base.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/css/admin.css') ?>" rel="stylesheet">
 </head>
 <body>
 <div class="adm">
@@ -58,7 +58,7 @@
   </div>
 </div>
 
-<script src="<?= $this->fmt->base('assets/vendor/bootstrap/bootstrap.bundle.min.js') ?>"></script>
+<script src="<?= $this->fmt->asset('assets/vendor/bootstrap/bootstrap.bundle.min.js') ?>"></script>
 <script>
 (function () {
   var side = document.getElementById('admSide'), bd = document.getElementById('admBackdrop'), tg = document.getElementById('admToggle');

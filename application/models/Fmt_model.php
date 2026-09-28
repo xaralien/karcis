@@ -13,6 +13,18 @@ class Fmt_model extends CI_Model
         return rtrim($this->config->base_url(), '/') . '/' . ltrim($path, '/');
     }
 
+    /**
+     * URL file CSS/JS dengan penanda versi (?v=waktu-ubah-file).
+     * Setiap kali file diganti, alamatnya ikut berubah sehingga browser
+     * dan CDN otomatis mengambil versi terbaru, tidak memakai cache lama.
+     */
+    public function asset($path)
+    {
+        $file = FCPATH . ltrim($path, '/');
+        $v    = is_file($file) ? filemtime($file) : time();
+        return $this->base($path) . '?v=' . $v;
+    }
+
     /** URL halaman, mengikuti pola controller/method bawaan CodeIgniter */
     public function url($uri = '')
     {

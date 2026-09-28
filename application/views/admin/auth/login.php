@@ -5,9 +5,9 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
   <title>Masuk Admin | <?= html_escape($app_name) ?></title>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/vendor/bootstrap/bootstrap.min.css') ?>" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/css/base.css') ?>" rel="stylesheet">
-  <link href="<?= $this->fmt->base('assets/css/admin.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/vendor/bootstrap/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/css/base.css') ?>" rel="stylesheet">
+  <link href="<?= $this->fmt->asset('assets/css/admin.css') ?>" rel="stylesheet">
 </head>
 <body>
 <div class="login-wrap">
