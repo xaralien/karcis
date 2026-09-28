@@ -130,7 +130,7 @@ if ( ! $ticket_types) $warn[] = 'kategori tiket';
           <tbody>
           <?php foreach ($facilities as $f): $fid = 'ff' . $f->id; ?>
             <tr>
-              <td><i class="bi <?= html_escape($f->icon) ?> fs-4" style="color:var(--plum)"></i></td>
+              <td><i class="bi <?= html_escape($f->icon) ?> fs-4" style="color:var(--plum)" data-icon-preview></i></td>
               <td><input form="<?= $fid ?>" class="form-control form-control-sm" name="name" value="<?= html_escape($f->name) ?>" required></td>
               <td><input form="<?= $fid ?>" class="form-control form-control-sm" name="icon" value="<?= html_escape($f->icon) ?>" list="iconList" style="max-width:200px"></td>
               <td class="text-end text-nowrap">
@@ -140,7 +140,7 @@ if ( ! $ticket_types) $warn[] = 'kategori tiket';
             </tr>
           <?php endforeach; ?>
             <tr style="background:#FBFAFE">
-              <td><i class="bi bi-plus-circle fs-4 text-muted-k"></i></td>
+              <td><i class="bi bi-plus-circle fs-4 text-muted-k" data-icon-preview></i></td>
               <td><input form="ffNew" class="form-control form-control-sm" name="name" placeholder="Area parkir" required></td>
               <td><input form="ffNew" class="form-control form-control-sm" name="icon" placeholder="bi-p-circle" list="iconList" style="max-width:200px"></td>
               <td class="text-end"><form method="post" action="<?= $this->fmt->url('admin/events/facility_save/' . $event->id) ?>" id="ffNew"><?= $this->fmt->csrf() ?><button class="btn btn-primary btn-sm text-nowrap"><i class="bi bi-plus-lg me-1"></i>Tambah</button></form></td>
@@ -148,7 +148,7 @@ if ( ! $ticket_types) $warn[] = 'kategori tiket';
           </tbody>
         </table>
         <datalist id="iconList">
-          <?php foreach (array('bi-cup-hot','bi-moon-stars','bi-droplet','bi-bag-check','bi-heart-pulse','bi-p-circle','bi-wifi','bi-universal-access','bi-snow','bi-person-hearts','bi-award','bi-grid-3x3','bi-camera','bi-lightning-charge','bi-shield-check','bi-bus-front') as $ic): ?><option value="<?= $ic ?>"><?php endforeach; ?>
+          <?php foreach (array('bi-cup-hot','bi-cup-straw','bi-egg-fried','bi-basket','bi-shop','bi-moon-stars','bi-droplet','bi-bag-check','bi-heart-pulse','bi-p-circle','bi-car-front','bi-wifi','bi-universal-access','bi-snow','bi-person-hearts','bi-award','bi-grid-3x3','bi-camera','bi-lightning-charge','bi-shield-check','bi-bus-front','bi-music-note-beamed','bi-ticket-perforated','bi-people','bi-clock','bi-geo-alt','bi-suitcase','bi-water','bi-tree','bi-sun','bi-umbrella') as $ic): ?><option value="<?= $ic ?>"><?php endforeach; ?>
         </datalist>
       </div>
     </div>

@@ -69,6 +69,36 @@
     var msg = e.target.getAttribute('data-confirm');
     if (msg && !window.confirm(msg)) e.preventDefault();
   });
+  // Pratinjau ikon Bootstrap Icons + peringatan bila nama ikonnya tidak ada
+  var cekIkon = function (input) {
+    var nama = input.value.trim();
+    var prev = input.closest('tr') ? input.closest('tr').querySelector('[data-icon-preview]') : null;
+    var test = document.createElement('i');
+    test.className = 'bi ' + nama;
+    test.style.cssText = 'position:absolute;visibility:hidden';
+    document.body.appendChild(test);
+    var isi = getComputedStyle(test, '::before').content;
+    document.body.removeChild(test);
+    var ada = nama !== '' && isi && isi !== 'none' && isi !== 'normal' && isi !== '""';
+
+    if (prev) prev.className = 'bi ' + (ada ? nama : 'bi-question-circle') + ' fs-4';
+    if (prev) prev.style.color = ada ? 'var(--plum)' : 'var(--danger)';
+    input.classList.toggle('is-invalid', !ada && nama !== '');
+    var pesan = input.parentNode.querySelector('.icon-warn');
+    if (!ada && nama !== '') {
+      if (!pesan) {
+        pesan = document.createElement('div');
+        pesan.className = 'icon-warn invalid-feedback d-block';
+        pesan.textContent = 'Nama ikon tidak ditemukan. Lihat daftar di icons.getbootstrap.com.';
+        input.parentNode.appendChild(pesan);
+      }
+    } else if (pesan) { pesan.remove(); }
+  };
+  document.querySelectorAll('input[name=icon]').forEach(function (inp) {
+    inp.addEventListener('input', function () { cekIkon(inp); });
+    if (inp.value.trim()) cekIkon(inp);
+  });
+
   document.querySelectorAll('input[type=file][data-preview]').forEach(function (inp) {
     inp.addEventListener('change', function () {
       var img = document.querySelector(inp.dataset.preview);

@@ -7,7 +7,7 @@
       <tbody>
       <?php foreach ($categories as $c): $fid = 'fc' . $c->id; ?>
         <tr>
-          <td><i class="bi <?= html_escape($c->icon) ?> fs-4" style="color:var(--plum)"></i></td>
+          <td><i class="bi <?= html_escape($c->icon) ?> fs-4" style="color:var(--plum)" data-icon-preview></i></td>
           <td><input form="<?= $fid ?>" class="form-control form-control-sm" name="name" value="<?= html_escape($c->name) ?>" required></td>
           <td><input form="<?= $fid ?>" class="form-control form-control-sm" name="icon" value="<?= html_escape($c->icon) ?>"></td>
           <td class="num"><?= (int) $c->total ?></td>
@@ -18,7 +18,7 @@
         </tr>
       <?php endforeach; ?>
         <tr style="background:#FBFAFE">
-          <td><i class="bi bi-plus-circle fs-4 text-muted-k"></i></td>
+          <td><i class="bi bi-plus-circle fs-4 text-muted-k" data-icon-preview></i></td>
           <td><input form="fcNew" class="form-control form-control-sm" name="name" placeholder="Seminar" required></td>
           <td><input form="fcNew" class="form-control form-control-sm" name="icon" placeholder="bi-easel"></td>
           <td></td>
