@@ -105,16 +105,18 @@ body.has-buybar { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
 .m-tabbar a { font-size: .66rem; }
 .m-tabbar a i { font-size: 1.2rem; }
 
-/* Carousel beranda: banner utuh, keterangan di bawah */
-.m-hero { padding: 6px 16px 18px; }
-.m-hero .carousel-item { aspect-ratio: auto; border-radius: 0; overflow: visible; }
-.m-hero .carousel-item::after { display: none; }
-.m-hero .hero-card { border-radius: var(--r-md); }
-.m-hero .hero-card-bd { display: block; padding: 14px 16px 16px; }
-.m-hero .hero-card-bd .t { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1.1; margin: 8px 0 4px; letter-spacing: -0.02em; }
-.m-hero .hero-card-bd .meta { display: block; font-size: .85rem; color: rgba(255,255,255,.78); }
-.m-hero .carousel-indicators { position: static; margin: 12px 0 0; }
-
 /* Detail event: banner utuh, kepala tidak menumpuk gambar */
 .m-ev-banner { aspect-ratio: auto; background: #120C29; }
 .m-ev-head { margin-top: 0; border-radius: 0; }
+
+/* ==========================================================
+   Carousel beranda (mobile): kartu tegak 4:5, gambar penuh satu
+   kartu, judul & tombol menumpang di bawah.
+   Ukuran banner mobile yang pas: 1080 x 1350 px (rasio 4:5).
+   ========================================================== */
+.m-hero { padding: 4px 16px 22px; }
+.m-hero .carousel-item { aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; position: relative; background: #120C29; }
+.m-hero .carousel-item::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(30,21,64,.95) 0%, rgba(30,21,64,.35) 38%, rgba(30,21,64,0) 60%); }
+.m-hero .hero-full { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.m-hero .m-hero-cap { z-index: 2; bottom: 34px; }
+.m-hero .carousel-indicators { z-index: 3; margin-bottom: 12px; }

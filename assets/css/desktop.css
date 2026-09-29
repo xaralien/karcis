@@ -130,24 +130,45 @@
   .container { padding-left: 14px; padding-right: 14px; }
 }
 
-/* Carousel beranda: banner utuh 16:7, keterangan di bawah */
-.hero .carousel-item { height: auto; border-radius: 0; overflow: visible; }
-.hero .carousel-item::after { display: none; }
-.hero-card-bd { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 28px; }
-.hero-card-bd .info { min-width: 0; }
-.hero-card-bd .t { display: block; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 2.6vw, 2.2rem); line-height: 1.1; margin: 8px 0 6px; letter-spacing: -0.02em; }
-.hero-card-bd .meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .92rem; color: rgba(255,255,255,.8); font-weight: 600; }
-.hero-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; }
-.hero-nav .carousel-indicators [data-bs-target] { width: 26px; height: 5px; border-radius: 3px; border: 0; opacity: .4; margin: 0 3px; }
-.hero-nav .carousel-indicators .active { background: var(--sun); opacity: 1; width: 44px; }
-.hero-arrow { width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.12); color: #fff; }
-.hero-arrow:hover { background: rgba(255,255,255,.22); }
-@media (max-width: 767.98px) {
-  .hero-card-bd { flex-direction: column; align-items: stretch; padding: 16px; gap: 12px; }
-}
-
 /* Detail event: banner utuh di atas judul */
 .ev-hero { height: auto; padding: 22px 0 32px; background: var(--ink); overflow: visible; }
 .ev-hero .ev-banner { border-radius: var(--r-lg); }
 .ev-hero h1 { color: #fff; margin: 20px 0 12px; max-width: none; }
 .ev-hero .hero-meta { color: rgba(255,255,255,.82); }
+
+/* ==========================================================
+   Carousel beranda (desktop): desain awal — gambar penuh,
+   judul & tombol di kiri bawah, panah di kanan bawah.
+   Bingkai 16:7 = banner 1600x700, jadi banner yang sesuai
+   ukuran tampil penuh tanpa terpotong.
+   ========================================================== */
+.hero .carousel-item { height: auto; aspect-ratio: 16 / 7; border-radius: var(--r-lg); overflow: hidden; position: relative; background: #120C29; }
+.hero .carousel-item > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero .carousel-item::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(30,21,64,.9) 0%, rgba(30,21,64,.5) 40%, rgba(30,21,64,0) 70%); }
+.hero-caption { z-index: 2; }
+.hero .carousel-indicators, .hero-shell .carousel-control-prev, .hero-shell .carousel-control-next { z-index: 3; }
+
+@media (max-width: 991.98px) {
+  .hero .carousel-item::after { background: linear-gradient(0deg, rgba(30,21,64,.92) 0%, rgba(30,21,64,.5) 45%, rgba(30,21,64,0) 75%); }
+}
+
+/* Navigasi carousel: titik penanda & panah berjajar, tidak bertumpuk */
+.hero .carousel-indicators {
+  top: auto; left: auto; right: 132px; bottom: 24px; margin: 0; padding: 0;
+  height: 44px; align-items: center; justify-content: flex-end;
+}
+.hero .carousel-indicators [data-bs-target] { margin: 0 3px; }
+.hero-shell .carousel-control-prev,
+.hero-shell .carousel-control-next {
+  top: auto; bottom: 24px; width: 44px; height: 44px; opacity: 1;
+  background: rgba(30,21,64,.55); border-radius: 50%; backdrop-filter: blur(4px);
+}
+.hero-shell .carousel-control-prev { left: auto; right: 80px; }
+.hero-shell .carousel-control-next { right: 24px; }
+.hero-shell .carousel-control-prev:hover,
+.hero-shell .carousel-control-next:hover { background: rgba(30,21,64,.8); }
+.hero-shell .carousel-control-prev-icon,
+.hero-shell .carousel-control-next-icon { width: 1.1rem; height: 1.1rem; }
+@media (max-width: 767.98px) {
+  .hero .carousel-indicators { right: 50%; transform: translateX(50%); bottom: 12px; height: 20px; }
+}

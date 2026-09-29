@@ -73,6 +73,24 @@ Buka **`/admin`** — login awal: `admin@karcis.id` / `admin123` (**segera ganti
 Langkah membuat event baru: **Event → Tambah event** (isi info + banner/thumbnail) → tab **Jadwal** → tab **Kategori tiket** → ubah status menjadi **Tayang**.
 Event tanpa kategori tiket otomatis tetap Draft.
 
+**Gambar event (tab Info event → Gambar):**
+
+| Gambar | Ukuran | Dipakai di |
+|---|---|---|
+| Banner | 1600×700 px | Carousel beranda desktop, halaman detail event |
+| Banner mobile *(disarankan)* | 1080×1350 px (4:5) | Carousel beranda di HP, memenuhi satu kartu |
+| Thumbnail | 800×600 px | Kartu event, katalog, checkout, riwayat |
+
+Templat berisi area aman ada di `assets/template/` (juga bisa diunduh dari tautan "unduh templat" di form admin).
+Judul dan tombol carousel menumpang di atas gambar (kiri bawah di desktop, bawah di HP), jadi sisakan area itu tanpa tulisan penting.
+Kalau banner mobile kosong, HP memakai banner utama yang dipotong bagian tengahnya, jadi tulisan di kiri-kanan banner bisa terpotong. Karena itu banner mobile sangat disarankan untuk event yang tampil di carousel.
+Database lama: jalankan `database/upgrade_banner_mobile.sql`.
+
+**Urutan carousel:** di tab Info event, saat sakelar "Tampilkan di carousel beranda" menyala, muncul kolom **Urutan carousel**.
+Angka kecil tampil lebih dulu; event tanpa angka mengikuti tanggal terdekat setelahnya. Maksimal 5 event tampil,
+dan event yang tanggalnya sudah lewat otomatis keluar dari carousel.
+Database lama: jalankan `database/upgrade_carousel.sql`.
+
 **Pratinjau draft:** selama kamu login sebagai admin, halaman event berstatus Draft atau Selesai tetap bisa dibuka
 (misalnya lewat tombol "Lihat halaman" di admin), lengkap dengan pita kuning "Pratinjau admin" dan tombol beli yang dinonaktifkan.
 Pengunjung biasa tetap mendapat 404 sampai statusnya diubah menjadi Tayang.

@@ -200,8 +200,6 @@ input.uppercase:not(:placeholder-shown) { text-transform: uppercase; }
 .hero-card:hover { color: #fff; }
 .hero-card .chip { position: static; }
 /* aturan lama carousel & detail memakai cover; bingkai banner selalu contain */
-.hero .banner-frame img,
-.m-hero .banner-frame img,
 .ev-hero .banner-frame img,
 .m-ev-banner .banner-frame img { object-fit: contain; width: 100%; height: 100%; opacity: 1; transform: none; }
 

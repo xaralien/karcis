@@ -89,6 +89,18 @@ $action = $event->id ? 'admin/events/edit/' . $event->id : 'admin/events/create'
           <input class="form-check-input" type="checkbox" role="switch" id="is_featured" name="is_featured" value="1" <?= $this->fmt->checked('is_featured', '1', (bool) $event->is_featured) ?>>
           <label class="form-check-label" for="is_featured">Tampilkan di carousel beranda</label>
         </div>
+        <div class="mt-2" id="featuredOrderWrap">
+          <label class="form-label small mb-1" for="featured_order">Urutan carousel</label>
+          <input class="form-control form-control-sm" style="max-width:120px" id="featured_order" name="featured_order" type="number" min="1" step="1" inputmode="numeric" value="<?= $this->fmt->old('featured_order', $event->featured_order) ?>" placeholder="otomatis">
+          <div class="hint">Angka kecil tampil lebih dulu. Kosongkan agar mengikuti tanggal terdekat. Maksimal 5 event yang tampil.</div>
+        </div>
+        <script>
+          (function () {
+            var sw = document.getElementById('is_featured'), wrap = document.getElementById('featuredOrderWrap');
+            var sync = function () { wrap.style.display = sw.checked ? '' : 'none'; };
+            sw.addEventListener('change', sync); sync();
+          })();
+        </script>
         <button class="btn btn-primary w-100 mt-4"><?= $event->id ? 'Simpan perubahan' : 'Simpan & lanjut isi jadwal' ?></button>
       </div>
     </div>
@@ -96,11 +108,25 @@ $action = $event->id ? 'admin/events/edit/' . $event->id : 'admin/events/create'
     <div class="card-k mt-3">
       <div class="hd"><h5>Gambar</h5></div>
       <div class="bd">
-        <label class="form-label" for="banner">Banner <span class="hint">(1600×700 px, maks 3MB)</span></label>
-        <div class="hint mb-2">Selalu tampil utuh tanpa dipotong di carousel dan halaman detail. Gambar dengan rasio lain tetap utuh, hanya diberi latar gelap di sisinya.</div>
-        <img id="pvBanner" class="img-preview mb-2" style="aspect-ratio:16/7;object-fit:contain;background:#120C29" src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt="">
+        <label class="form-label" for="banner">Banner <span class="hint">(1600×700 px, maks 3MB)</span>
+          <a class="hint ms-1" href="<?= $this->fmt->base('assets/template/template-banner-desktop-1600x700.png') ?>" target="_blank" rel="noopener">unduh templat</a></label>
+        <div class="hint mb-2">Dipakai carousel beranda di desktop dan halaman detail event. Judul dan tombol menumpang di kiri bawah, jadi sisakan area itu tanpa tulisan penting.</div>
+        <img id="pvBanner" class="img-preview mb-2" style="aspect-ratio:16/7;object-fit:cover;background:#120C29" src="<?= html_escape($this->fmt->img($event->banner)) ?>" alt="">
         <input class="form-control form-control-sm" type="file" id="banner" name="banner" accept="image/jpeg,image/png,image/webp" data-preview="#pvBanner" <?= $event->id ? '' : 'required' ?>>
         <?= $err('banner') ?>
+        <label class="form-label mt-3" for="banner_mobile">Banner mobile <span class="hint">(1080×1350 px, rasio 4:5)</span>
+          <a class="hint ms-1" href="<?= $this->fmt->base('assets/template/template-banner-mobile-1080x1350.png') ?>" target="_blank" rel="noopener">unduh templat</a></label>
+        <div class="hint mb-2">Memenuhi satu kartu carousel di HP; judul dan tombol menumpang di sepertiga bawah, jadi letakkan tulisan penting di bagian atas.
+          Kalau kosong, HP memakai banner utama yang dipotong bagian tengahnya.</div>
+        <img id="pvBannerM" class="img-preview mb-2" style="aspect-ratio:4/5;max-width:190px;display:block;object-fit:cover;background:#120C29<?= empty($event->banner_mobile) ? ';opacity:.35' : '' ?>" src="<?= html_escape($this->fmt->img($event->banner_mobile ?: $event->banner)) ?>" alt="">
+        <input class="form-control form-control-sm" type="file" id="banner_mobile" name="banner_mobile" accept="image/jpeg,image/png,image/webp" data-preview="#pvBannerM">
+        <?= $err('banner_mobile') ?>
+        <?php if ( ! empty($event->banner_mobile)): ?>
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" id="remove_banner_mobile" name="remove_banner_mobile" value="1">
+          <label class="form-check-label small" for="remove_banner_mobile">Hapus banner mobile (kembali memakai banner utama)</label>
+        </div>
+        <?php endif; ?>
         <label class="form-label mt-3" for="thumbnail">Thumbnail <span class="hint">(800×600)</span></label>
         <img id="pvThumb" class="img-preview mb-2" style="aspect-ratio:4/3" src="<?= html_escape($this->fmt->img($event->thumbnail)) ?>" alt="">
         <input class="form-control form-control-sm" type="file" id="thumbnail" name="thumbnail" accept="image/jpeg,image/png,image/webp" data-preview="#pvThumb" <?= $event->id ? '' : 'required' ?>>

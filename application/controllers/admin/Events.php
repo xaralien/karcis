@@ -26,9 +26,9 @@ class Events extends Admin_Controller
     {
         $event = (object) array(
             'id' => 0, 'category_id' => '', 'title' => '', 'slug' => '', 'event_type' => '', 'organizer' => '',
-            'short_desc' => '', 'description' => '', 'banner' => '', 'thumbnail' => '', 'venue' => '',
+            'short_desc' => '', 'description' => '', 'banner' => '', 'banner_mobile' => NULL, 'thumbnail' => '', 'venue' => '',
             'address' => '', 'city' => '', 'maps_url' => '', 'start_date' => date('Y-m-d', strtotime('+30 days')),
-            'is_featured' => 0, 'status' => 'draft',
+            'is_featured' => 0, 'featured_order' => NULL, 'status' => 'draft',
         );
         if ($this->input->method() === 'post') {
             if ($id = $this->save_event(0)) {
@@ -110,6 +110,8 @@ class Events extends Admin_Controller
             'maps_url'    => $this->input->post('maps_url', TRUE) ?: NULL,
             'start_date'  => $this->input->post('start_date'),
             'is_featured' => $this->input->post('is_featured') ? 1 : 0,
+            'featured_order' => ($this->input->post('is_featured') && trim((string) $this->input->post('featured_order')) !== '')
+                ? max(1, (int) $this->input->post('featured_order')) : NULL,
             'status'      => $this->input->post('status'),
         );
 
@@ -126,6 +128,20 @@ class Events extends Admin_Controller
                 $this->field_errors[$field] = 'Gambar ' . $field . ' wajib diunggah.';
                 return FALSE;
             }
+        }
+
+        // Banner mobile: opsional. Kosong = carousel mobile memakai banner utama.
+        $bm = $this->upload_image('banner_mobile');
+        if ($bm === FALSE) {
+            $this->field_errors['banner_mobile'] = 'Banner mobile: ' . $this->upload_error;
+            return FALSE;
+        }
+        if ($bm) {
+            $row['banner_mobile'] = $bm;
+            if ($old) $this->delete_local_image($old->banner_mobile);
+        } elseif ($old && $old->banner_mobile && $this->input->post('remove_banner_mobile')) {
+            $this->delete_local_image($old->banner_mobile);
+            $row['banner_mobile'] = NULL;
         }
 
         if ($row['status'] === 'published' && $id && ! $this->db->where('event_id', $id)->count_all_results('ticket_types')) {
@@ -155,6 +171,7 @@ class Events extends Admin_Controller
         }
         $this->delete_local_image($event->banner);
         $this->delete_local_image($event->thumbnail);
+        $this->delete_local_image($event->banner_mobile);
         foreach ($this->Admin_model->children('event_guests', $id) as $g) $this->delete_local_image($g->photo);
         foreach ($this->Admin_model->children('event_gallery', $id) as $g) $this->delete_local_image($g->image);
         $this->db->where('id', $id)->delete('events');

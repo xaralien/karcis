@@ -25,7 +25,7 @@ $this->load->vars('actions', '<a class="btn btn-primary btn-sm" href="' . $this-
           <td style="width:64px"><img class="thumb" src="<?= html_escape($this->fmt->img($e->thumbnail)) ?>" alt=""></td>
           <td>
             <a class="fw-semibold" href="<?= $this->fmt->url('admin/events/edit/' . $e->id) ?>"><?= html_escape($e->title) ?></a>
-            <div class="small text-muted-k"><?= html_escape($e->category_name) ?><?= $e->is_featured ? ' · <i class="bi bi-star-fill text-warning"></i> Unggulan' : '' ?></div>
+            <div class="small text-muted-k"><?= html_escape($e->category_name) ?><?= $e->is_featured ? ' · <i class="bi bi-star-fill text-warning"></i> Carousel' . ($e->featured_order ? ' #' . (int) $e->featured_order : '') : '' ?></div>
           </td>
           <td class="text-nowrap"><?= $this->fmt->tgl($e->start_date, FALSE) ?><div class="small text-muted-k"><?= (int) $e->total_days ?> hari</div></td>
           <td><?= html_escape($e->city) ?></td>

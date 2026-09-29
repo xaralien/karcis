@@ -14,10 +14,17 @@ class Event_model extends CI_Model
             ->where($any_status ? '1 = 1' : "e.status = 'published'", NULL, FALSE);
     }
 
+    /**
+     * Carousel beranda: event unggulan yang masih akan berlangsung.
+     * Urutan manual (featured_order) didahulukan; yang tanpa urutan ikut tanggal terdekat.
+     */
     public function featured($limit = 5)
     {
         return $this->base()->where('e.is_featured', 1)->where('e.start_date >=', date('Y-m-d'))
-            ->order_by('e.start_date', 'ASC')->limit($limit)->get()->result();
+            ->order_by('e.featured_order IS NULL', 'ASC', FALSE)
+            ->order_by('e.featured_order', 'ASC')
+            ->order_by('e.start_date', 'ASC')
+            ->limit($limit)->get()->result();
     }
 
     public function upcoming($limit = 6)
